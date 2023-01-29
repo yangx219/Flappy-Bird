@@ -1,22 +1,31 @@
 package model;
 
-import view.Affichage;
-import view.Vue;
+import view.*;
 
 import java.awt.*;
 
 public class Etat{
-	public int hauteur;
-	public int jumphaut=20;
+	public int hauteur ;
+	public int jumphaut=50;
 	public static final int downlength = 30;
+	/* Constantes */
+	public static int largOval = 40;
+	public static int hautOval =200;
 	public Parcours parcours;
+	private int x0 ;
+	private int y0 ;
+	public boolean exit;
 
 
 	/** Constructeur */
 	public Etat() {
-		Parcours p = new Parcours();
-		this.parcours=p;
-
+		Parcours parcours1 = new Parcours();
+		this.parcours=parcours1;
+		this.hauteur = parcours.points.get(1).y-hautOval/2;
+		//centreOvale (x0,y0)
+		x0 =parcours.points.get(0).x+20;
+		y0 = this.hauteur+hautOval/2;
+		this.exit = testPerdu();
 
 
 	}
@@ -25,34 +34,39 @@ public class Etat{
 	/*** augmenter la valeur de la hauteur* */
 
 	public void jump() {
-		if (this.hauteur == 0){
-			this.hauteur = 0;
+		if (this.hauteur <= 0){
+			this.hauteur= 0;
 		}else{
 			this.hauteur -= jumphaut;
 		}
 	}
 
+	/**permet de modifier la valeur de la hauteur de quelques pixels vers le bas,
+	 * sans sortir de la zone de dessin*/
 	public void moveDown(){
 		/*** modifier la valeur de la hauteur de quelques pixels vers le bas,
 		 * sans sortir de la zone de dessin. */
-		if (this.hauteur + Affichage.hautOval + downlength < Affichage.HAUT ) {
+		if (this.hauteur + hautOval + downlength <= Fenetre.HAUT ) {
 				this.hauteur += downlength;
 			}
 
 	}
 
+	public boolean testPerdu(){
 
-
-	public void drawline(Parcours parcours, Graphics g){
-		//parcours.points = parcours.generate();
-		while (true) {
-			parcours.points = parcours.generate();
-			for (int i = 0; i < parcours.points.size()-2; i++) {
-
-				g.drawLine(parcours.points.get(i).x, parcours.points.get(i).y, parcours.points.get(i + 1).x, parcours.points.get(i + 1).y);
-				//g.drawLine(parcours.points.get(i+1).x, parcours.points.get(i).y, parcours.points.get(i + 2).x, parcours.points.get(i + 2).y);
-			}
+		Point p1 = parcours.points.get(0);
+		Point p2 = parcours.points.get(1);
+		float pente = parcours.pente(p1,p2);
+		x0 =parcours.points.get(0).x+20;
+		y0 = this.hauteur+hautOval/2;
+		float y =  pente*(x0)+((p1.y)-pente*p1.x);
+		//y0 > y + 50||y0 < y - 50
+		if (y0 > y + 100||y0 < y - 100){
+			return true;
+		}else {
+			return false;
 		}
+
 	}
 
 	public int getHauteur(){

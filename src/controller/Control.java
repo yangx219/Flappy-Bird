@@ -1,4 +1,4 @@
-package control;
+package controller;
 
 import model.Etat;
 import view.Affichage;
@@ -11,11 +11,11 @@ public class Control implements MouseListener {
     private Affichage affichage;
     private Voler voler;
 
-
     /** Constructeur */
     public Control(Etat etat, Affichage affichage) {
         this.etat = etat;
         this.affichage = affichage;
+
 
     }
 
@@ -30,8 +30,13 @@ public class Control implements MouseListener {
      * */
     @Override
     public void mouseClicked(MouseEvent e) {
-        etat.jump();
-        affichage.repaint();
+        if (!etat.exit){
+            etat.exit = etat.testPerdu();
+            System.out.println("control");
+            etat.jump();
+            affichage.repaint();
+        }
+
     }
 
     @Override
