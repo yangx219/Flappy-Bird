@@ -12,12 +12,12 @@ public class Main {
         Fenetre fenetre = new Fenetre("Flappy bird",affichage);
 
 
-        if (!affichage.etat.testPerdu()){
-            (new Voler(affichage.etat,affichage)).start();
-            (new Avancer(affichage.etat,affichage.parcours,affichage)).start();
-        }else {
-            affichage.gameOver(affichage.getGraphics());
-        }
+       //if (!affichage.etat.testPerdu()){
+           (new Voler(affichage.etat,affichage)).start();
+           (new Avancer(affichage.etat,affichage.parcours,affichage,fenetre)).start();
+        //}else {
+           // affichage.gameOver(affichage.getGraphics());
+        //}
 
 
         //Parcours par = new Parcours();
