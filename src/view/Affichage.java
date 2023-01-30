@@ -2,13 +2,16 @@ package view;
 
 import controller.Control;
 import controller.Voler;
+import model.Bird;
 import model.Etat;
 import model.Parcours;
 
 import java.awt.*;
 import javax.swing.JPanel;
 
- /** @author YANG Xue L3 info_miage(PCII)*/
+import static view.VueOiseau.drawBird;
+
+/** @author YANG Xue L3 info_miage(PCII)*/
 
 //devoir se déclarer comme listener pour ce type d’événement
 public class Affichage extends JPanel {
@@ -22,6 +25,9 @@ public class Affichage extends JPanel {
       public Voler voler;
        public Control control;
 
+       private VueOiseau vueOiseau;
+       private Bird bird;
+
 
         
         /** Constructeur */
@@ -30,6 +36,8 @@ public class Affichage extends JPanel {
             control = new Control(etat, this);
 			this.addMouseListener(control);
             parcours = new Parcours();
+            this.vueOiseau = new VueOiseau();
+            this.bird=new Bird();
         }
         /** le système d’exploitation appelle cette méthode à chaque fois 
          *  qu’il a besoin de mettre à jour l’affichage
@@ -45,7 +53,7 @@ public class Affichage extends JPanel {
                 g.drawOval(parcours.points.get(0).x, etat.getHauteur(), etat.largOval, etat.hautOval);
                 g.setColor(Color.black);
                 paintParcours(g);
-
+                paintBird(g);
 
         }
 
@@ -60,12 +68,15 @@ public class Affichage extends JPanel {
             }
         }
 
-
-        public void gameOver(Graphics g){
-            String gameOver ="GAME OVER";
-            g.setColor(Color.red);
-            g.drawString(gameOver,600,600);
+        public void paintBird(Graphics g){
+            Bird bird = new Bird();
+            this.vueOiseau.birds.add(bird);
+            for (int i=1; i <= 8; i++){
+                drawBird(g,bird.getPosition(),bird.getHauteur(),i);
+            }
         }
+
+
 
 
 

@@ -34,12 +34,12 @@ public class Parcours {
         for (int i = 0; i <= nbPas; i++) {
             Point p = new Point();
             p.x = (Fenetre.LARGE) / nbPas * (i);
-            p.y = rand.nextInt(Fenetre.HAUT-50);
+            p.y = rand.nextInt(Fenetre.HAUT);
             if (points.size() == 0) {
                 points.add(p);
                 currentIndex++;
             } else {
-                while (Math.abs(pente(p, points.get(currentIndex - 1))) > 0.2) {
+                while (Math.abs(pente(p, points.get(currentIndex - 1))) > 0.3) {
                     p.y = rand.nextInt(Fenetre.HAUT);
                 }
                 points.add(p);
@@ -77,7 +77,7 @@ public class Parcours {
 
         int size = points.size();
         Point lastPoint = points.get(size - 1);
-        while (Math.abs(pente(newP, lastPoint)) > 0.2) {
+        while (Math.abs(pente(newP, lastPoint)) > 0.3) {
             newP.y = rand.nextInt(Fenetre.HAUT);
         }
 

@@ -12,23 +12,20 @@ public class Fenetre {
     public static int HAUT = 600;
     private JFrame frame;
     private Affichage affichage;
+    private VueOiseau vueOiseau;
     //public VueOiseau vueOiseau;
     public Fenetre(String title, Affichage affichage) {
         //JFrame: implémenter une fenêtre
         JFrame frame = new JFrame();
         this.frame = frame;
         this.affichage = affichage;
+
         //ajouter le composant graphique
         frame.add(affichage);
+        //frame.add(vueOiseau);
         frame.setTitle(title);
         //fermer la fenêtre
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        //this.vueOiseau = new VueOiseau();
-
-        //(new Voler(affichage.etat,affichage)).start();
-       //(new Avancer(affichage.etat,affichage.parcours,affichage,)).start();
-        //(new Oiseau(affichage.etat,affichage,vueOiseau)).start();
 
 
         /**Définir ses dimensions (largeur et hauteur) */
