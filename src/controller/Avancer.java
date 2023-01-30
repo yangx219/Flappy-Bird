@@ -21,6 +21,8 @@ public class Avancer extends Thread{
 
     }
 
+    /**  Vérifiez si l'ellipse est hors ligne, sinon, déplacez les lignes
+     * */
     public void run(){
         System.out.println(etat.exit);
         while(!etat.exit){
@@ -28,16 +30,14 @@ public class Avancer extends Thread{
                 etat.parcours.getParcours();
                 etat.parcours.setPosition(etat.parcours.getPosition() + 1);
                 System.out.println(etat.parcours.getPosition());
-                //System.out.println(etat.exit);
                 etat.exit = etat.testPerdu();
-
-                /**forcer le dessin*/
-                this.affichage.revalidate();
-                this.affichage.repaint();
                 Thread.sleep(800);
             }catch (InterruptedException e){
                 e.printStackTrace();
             }
+            /**forcer le dessin*/
+            this.affichage.revalidate();
+            this.affichage.repaint();
             if (etat.exit){
                 fenetre.displayGUI(etat.parcours.getPosition());
             }

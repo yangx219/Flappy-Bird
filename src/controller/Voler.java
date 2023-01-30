@@ -14,22 +14,22 @@ public class Voler extends Thread {
         this.etat = etat;
         this.affichage = affichage;
     }
+    /**  Vérifiez si l'ellipse est hors ligne, sinon, déplacez l'ellipse vers le bas
+     * */
     @Override
     public void run(){
         while(!etat.exit){
             try{
                 etat.exit = etat.testPerdu();
                 etat.moveDown();
-                /**forcer le dessin*/
-                this.affichage.revalidate();
-                this.affichage.repaint();
-                Thread.sleep(800);
+
+                Thread.sleep(600);
             }catch (InterruptedException e){
                 e.printStackTrace();
             }
-
-
-
+            /**forcer le dessin*/
+            this.affichage.revalidate();
+            this.affichage.repaint();
         }
     }
 

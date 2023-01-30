@@ -9,37 +9,31 @@ import java.util.Random;
 
 public class Parcours {
     public ArrayList<Point> points;
-    private Random rand;
-    private int changeSpeed = 10;
     private int position;
-    private Etat etat;
     private int distance = 160;
     private int nbPas = Fenetre.LARGE / distance;
 
     public Parcours() {
         position = 0;
-        points = new ArrayList<Point>();
+        points = new ArrayList<>();
         generate();
     }
 
     /**
-     * creer les points que on a besoin
+     * Générer les points nécessaires
      */
-
-
     public void generate() {
         Random rand = new Random();
         int currentIndex = 0;
-        //Point centreOvale = new Point(points.get(0).x, etat.getHauteur());
         for (int i = 0; i <= nbPas; i++) {
             Point p = new Point();
             p.x = (Fenetre.LARGE) / nbPas * (i);
-            p.y = rand.nextInt(Fenetre.HAUT);
+            p.y = rand.nextInt(Fenetre.HAUT-50)+50;
             if (points.size() == 0) {
                 points.add(p);
                 currentIndex++;
             } else {
-                while (Math.abs(pente(p, points.get(currentIndex - 1))) > 0.3) {
+                while (Math.abs(pente(p, points.get(currentIndex - 1))) > 0.5) {
                     p.y = rand.nextInt(Fenetre.HAUT);
                 }
                 points.add(p);
@@ -59,8 +53,9 @@ public class Parcours {
         return (float) ((b.y)- (a.y)) / (b.x - a.x);
     }
 
-    /**
-     * getParcours ne renvoie que les points visibles
+    /** getParcours ne renvoie que les points visibles
+     *
+     *  @return ArrayList<Point>   les points visibles
      */
     public ArrayList<Point> getParcours() {
         /**on bouge les points*/
@@ -71,16 +66,15 @@ public class Parcours {
         /**on retire la premier points qui est deja sortie la fenetre */
         points.remove(0);
         /**creer un nouveau point pour ajouter dans la fenetre*/
+        int size = points.size();
         Point newP = new Point();
-        newP.x = points.get(points.size() - 1).x + distance;
+        newP.x = points.get(size - 1).x + distance;
         newP.y = rand.nextInt(Fenetre.HAUT);
 
-        int size = points.size();
         Point lastPoint = points.get(size - 1);
-        while (Math.abs(pente(newP, lastPoint)) > 0.3) {
+        while (Math.abs(pente(newP, lastPoint)) > 0.5) {
             newP.y = rand.nextInt(Fenetre.HAUT);
         }
-
         points.add(newP);
         return points;
     }

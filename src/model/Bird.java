@@ -17,9 +17,6 @@ public class Bird {
 
     /**définit l’abscisse.*/
     public int position;
-    public Affichage affichage;
-
-    public VueOiseau vueOiseau;
 
     public Bird() {
         Random rand = new Random();
@@ -28,16 +25,6 @@ public class Bird {
         this.position = 600;
 
     }
-
-
-
-
-
-
-
-
-
-
     public int getPosition() {
         return position;
     }

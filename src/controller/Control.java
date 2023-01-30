@@ -15,18 +15,11 @@ public class Control implements MouseListener {
     public Control(Etat etat, Affichage affichage) {
         this.etat = etat;
         this.affichage = affichage;
-
-
     }
 
-    /** package java.awt.event: chaque événement (clavier, souris, etc)
-     *  dont le système d’exploitation est informé peut être retransmis
-     *  au programme pour qu’il puisse y réagir.
-     *
-     *  Il existe autant d’événements que de types d’interaction:
-     *  ActionEvent, AdjustmentEvent, ComponentEvent, ContainerEvent, FocusEvent, etc.
-     *
-     *  mouseClicked est appelée chaque fois que l’utilisateur clique dans la zone d’affichage.
+    /**
+     *  mouseClicked est appelée chaque fois que l’utilisateur clique dans la zone d’affichage
+     *  @param e est une intance de la classe java.awt.MouseEvent
      * */
     @Override
     public void mouseClicked(MouseEvent e) {
